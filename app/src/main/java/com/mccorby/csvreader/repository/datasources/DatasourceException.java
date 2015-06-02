@@ -1,4 +1,4 @@
-package com.mccorby.csvreader.datasource;
+package com.mccorby.csvreader.repository.datasources;
 
 /**
  * Created by JAC on 02/06/2015.

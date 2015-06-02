@@ -1,6 +1,7 @@
 package com.mccorby.csvreader.datasource.parser;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.mccorby.csvreader.domain.entities.CustomerImage;
 
@@ -30,7 +31,7 @@ public class CSVParser implements CustomerImageParser {
     @Override
     public List<CustomerImage> parse(String filename) throws ParsingException{
 
-        FileInputStream fis = null;
+        FileInputStream fis;
         try {
             fis = mContext.openFileInput(filename);
         } catch (FileNotFoundException e) {
@@ -40,7 +41,7 @@ public class CSVParser implements CustomerImageParser {
 
 
         Reader in = new InputStreamReader(fis);
-        org.apache.commons.csv.CSVParser parser = null;
+        org.apache.commons.csv.CSVParser parser;
         try {
             parser = new org.apache.commons.csv.CSVParser(in, CSVFormat.EXCEL.withHeader());
         } catch (IOException e) {
@@ -59,6 +60,7 @@ public class CSVParser implements CustomerImageParser {
             ci.setImageUrl(url);
             list.add(ci);
         }
+        Log.d(TAG, "List size " + list.size());
         return list;
     }
 }

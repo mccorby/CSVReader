@@ -1,13 +1,12 @@
 package com.mccorby.csvreader.datasource.network;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.mccorby.csvreader.BuildConfig;
-import com.mccorby.csvreader.datasource.DatasourceException;
 import com.mccorby.csvreader.datasource.parser.CustomerImageParser;
 import com.mccorby.csvreader.datasource.parser.ParsingException;
 import com.mccorby.csvreader.domain.entities.CustomerImage;
+import com.mccorby.csvreader.repository.datasources.DatasourceException;
 import com.mccorby.csvreader.repository.datasources.NetworkDatasource;
 
 import java.io.IOException;
@@ -22,7 +21,6 @@ import java.util.List;
  */
 public class NetworkDatasourceImpl implements NetworkDatasource {
 
-    private static final String TAG = NetworkDatasourceImpl.class.getSimpleName();
     private CustomerImageParser mParser;
     private final Context mContext;
 
@@ -42,7 +40,8 @@ public class NetworkDatasourceImpl implements NetworkDatasource {
         getFileFromBackend(fileUrl, fileDestination);
         // Parse the local file
         try {
-            return mParser.parse(fileDestination);
+            List<CustomerImage> imageList = mParser.parse(fileDestination);
+            return imageList;
         } catch (ParsingException e) {
             e.printStackTrace();
             throw new DatasourceException(e.getMessage());
@@ -68,7 +67,6 @@ public class NetworkDatasourceImpl implements NetworkDatasource {
             // Expect HTTP 200
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 // Handle server error messages
-                Log.d(TAG, "Response code was wrong " + connection.getResponseCode() + ": " + connection.getResponseMessage());
                 throw new DatasourceException("No response from server");
             }
             // Get the file using the internal app filesystem

@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:padding="@dimen/abc_list_item_padding_horizontal_material">
+
+    <TextView
+        android:id="@+id/item_customer_image_list_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_alignParentLeft="true"
+        tools:text="Title of image. This is a very large title that makes trouble"
+        android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"/>
 
     <ImageView
         android:id="@+id/item_customer_image_list_iv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        tools:src="@mipmap/ic_launcher"
+        />
 
-</LinearLayout>
+</RelativeLayout>

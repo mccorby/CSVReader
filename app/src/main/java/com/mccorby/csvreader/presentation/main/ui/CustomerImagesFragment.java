@@ -76,8 +76,6 @@ public class CustomerImagesFragment extends Fragment implements MainView {
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
 
-
-
         mMainPresenter.onCreate();
 
         return rootView;

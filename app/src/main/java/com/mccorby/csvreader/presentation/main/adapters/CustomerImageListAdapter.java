@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mccorby.csvreader.R;
 import com.mccorby.csvreader.domain.entities.CustomerImage;
+import com.mccorby.csvreader.presentation.main.ui.transformation.ThumbnailTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,11 +43,13 @@ public class CustomerImageListAdapter extends RecyclerView.Adapter<CustomerImage
             Picasso picasso = Picasso.with(mContext);
             picasso.setIndicatorsEnabled(true);
             picasso.load(image.getImageUrl())
-
+                    .placeholder(R.mipmap.ic_launcher)
+                    .transform(new ThumbnailTransformation())
                     .error(R.mipmap.ic_launcher)
                     .into(viewHolder.mImageView);
 
         }
+        viewHolder.mTitle.setText(image.getTitle());
     }
 
     @Override
@@ -56,10 +60,12 @@ public class CustomerImageListAdapter extends RecyclerView.Adapter<CustomerImage
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mImageView;
+        TextView mTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mImageView = (ImageView) itemView.findViewById(R.id.item_customer_image_list_iv);
+            mTitle = (TextView) itemView.findViewById(R.id.item_customer_image_list_title_tv);
         }
     }
 

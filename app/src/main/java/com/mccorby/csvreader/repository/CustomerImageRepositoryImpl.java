@@ -1,9 +1,9 @@
 package com.mccorby.csvreader.repository;
 
-import com.mccorby.csvreader.datasource.DatasourceException;
 import com.mccorby.csvreader.domain.entities.CustomerImage;
 import com.mccorby.csvreader.domain.repository.CustomerImageRepository;
 import com.mccorby.csvreader.repository.datasources.CacheDatasource;
+import com.mccorby.csvreader.repository.datasources.DatasourceException;
 import com.mccorby.csvreader.repository.datasources.NetworkDatasource;
 
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class CustomerImageRepositoryImpl implements CustomerImageRepository {
     public List<CustomerImage> getImages() {
         if (mCacheDatasource.getImages() == null || mCacheDatasource.getImages().size() == 0) {
             // First retrieve the list of images from the network
-            List<CustomerImage> images = null;
+            List<CustomerImage> images;
             try {
                 images = mNetworkDatasource.getImages();
                 // Second add it to the cache system

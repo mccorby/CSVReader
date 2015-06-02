@@ -29,7 +29,7 @@ public class MemoryCacheDatasourceImpl implements CacheDatasource {
     @Override
     public void addImages(List<CustomerImage> imageList) {
         if (mCustomerImages == null) {
-            mCustomerImages = new ArrayList<>(imageList);
+            mCustomerImages = new ArrayList<>(imageList.size());
         }
         mCustomerImages.addAll(imageList);
     }
