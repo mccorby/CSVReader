@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             tools:context="com.mccorby.csvreader.presentation.detail.ui.DetailFragment">
+
+    <TextView
+        android:id="@+id/fragment_detail_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Title"/>
+
+    <TextView
+        android:id="@+id/fragment_detail_description_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="This is the description and so"/>
+
+    <ImageView
+        android:id="@+id/fragment_detail_image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:src="@mipmap/ic_launcher"/>
+
+
+</LinearLayout>

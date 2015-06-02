@@ -23,10 +23,16 @@ public class CustomerImageListAdapter extends RecyclerView.Adapter<CustomerImage
 
     private Context mContext;
     private List<CustomerImage> mImageList;
+    private OnCustomerImageClickListener mListener;
 
-    public CustomerImageListAdapter(Context context, List<CustomerImage> list) {
+    public interface OnCustomerImageClickListener {
+        void onCustomerImageClicked(CustomerImage customerImage);
+    }
+
+    public CustomerImageListAdapter(Context context, List<CustomerImage> list, OnCustomerImageClickListener listener) {
         this.mImageList = list;
         this.mContext = context;
+        this.mListener = listener;
     }
 
     @Override
@@ -66,6 +72,12 @@ public class CustomerImageListAdapter extends RecyclerView.Adapter<CustomerImage
             super(itemView);
             mImageView = (ImageView) itemView.findViewById(R.id.item_customer_image_list_iv);
             mTitle = (TextView) itemView.findViewById(R.id.item_customer_image_list_title_tv);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onCustomerImageClicked(mImageList.get(getPosition()));
+                }
+            });
         }
     }
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CSV Image Reader</string>
     <string name="title_activity_main">Customer Images</string>
-<!-- TODO: Remove or change this placeholder text -->
     <string name="no_items_available">We could not find any items</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
 </resources>

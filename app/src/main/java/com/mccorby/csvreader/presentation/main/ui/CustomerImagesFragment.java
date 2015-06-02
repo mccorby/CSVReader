@@ -1,6 +1,7 @@
 package com.mccorby.csvreader.presentation.main.ui;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,9 +33,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CustomerImagesFragment extends Fragment implements MainView {
+public class CustomerImagesFragment extends Fragment implements MainView, CustomerImageListAdapter.OnCustomerImageClickListener {
 
     private static final String TAG = CustomerImagesFragment.class.getSimpleName();
+    private CustomerImageActionListener mListener;
+
+    public interface CustomerImageActionListener {
+        void customerImageSelected(CustomerImage customerImage);
+    }
 
     // TODO This member to be injected!
     MainPresenter mMainPresenter;
@@ -50,6 +56,16 @@ public class CustomerImagesFragment extends Fragment implements MainView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         injectObjects();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof CustomerImageActionListener) {
+            this.mListener = (CustomerImageActionListener) activity;
+        } else {
+            throw new IllegalStateException("Activity must implement CustomerImageActionListener");
+        }
     }
 
     private void injectObjects() {
@@ -72,7 +88,7 @@ public class CustomerImagesFragment extends Fragment implements MainView {
         // Use a linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new CustomerImageListAdapter(getActivity(), null);
+        mAdapter = new CustomerImageListAdapter(getActivity(), null, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
 
@@ -88,5 +104,11 @@ public class CustomerImagesFragment extends Fragment implements MainView {
         if (items.size() == 0) {
             mErrorHandler.displayError(getString(R.string.no_items_available));
         }
+    }
+
+    @Override
+    public void onCustomerImageClicked(CustomerImage customerImage) {
+        // Tell the activity to do something with the clicked Customer Image object
+        mListener.customerImageSelected(customerImage);
     }
 }
