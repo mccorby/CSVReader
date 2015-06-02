@@ -16,6 +16,9 @@ public class DetailActivity extends ActionBarActivity {
         DetailFragment fragment = new DetailFragment();
 
         if (getIntent().getExtras() != null) {
+            // In a proper clean architecture, we would be using here an interactor using the id
+            // of the object. The presenter would then use it to retrieve the object.
+
             Bundle args = new Bundle();
             args.putParcelable(Constants.ARG_CUSTOMER_VIEW, getIntent().getParcelableExtra(Constants.ARG_CUSTOMER_VIEW));
             fragment.setArguments(args);
